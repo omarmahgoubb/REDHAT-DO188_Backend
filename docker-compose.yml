@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  database:
+    image: omarrmahgoub/openshift_project_database:v1.0
+    container_name: mymongo
+    hostname: mymongo
+    networks:
+      - tools3_net
+    ports:
+      - "27017:27017"
+    volumes:
+      - tools3_db:/data/db
+    restart: always
+
+  backend:
+    image: omarrmahgoub/openshift_project_backend:v1.0
+    container_name: mypython
+    hostname: mypython
+    networks:
+      - tools3_net
+    ports:
+      - "5000:5000"
+    restart: always
+    depends_on:
+      - database
+
+  frontend:
+    image: omarrmahgoub/openshift_project_frontend:v1.0
+    container_name: myangular
+    hostname: myangular
+    networks:
+      - tools3_net
+    ports:
+      - "4200:4200"
+    restart: always
+
+networks:
+  tools3_net:
+    name: tools3_net
+    driver: bridge
+
+volumes:
+  tools3_db:
+    name: tools3_db
