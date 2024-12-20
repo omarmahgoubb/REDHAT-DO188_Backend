@@ -10,7 +10,8 @@ from bson import ObjectId
 
 app = Flask(__name__)
 #CORS(app, supports_credentials=True, origins=["http://localhost:4200"])
-CORS(app, supports_credentials=True, origins=["*"])
+#CORS(app, supports_credentials=True, origins=["*"])
+CORS(app, supports_credentials=True, origins=["https://my-angular-app-omarmahgoub-dev.apps.rm3.7wse.p1.openshiftapps.com"])
 #app.config["MONGO_URI"] = "mongodb://localhost:27017/package_tracking_system"
 app.config["MONGO_URI"] = "mongodb://mymongo:27017/package_tracking_system"
 
